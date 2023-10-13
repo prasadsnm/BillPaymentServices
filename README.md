@@ -1,16 +1,16 @@
-# BillPaymentServices
-Bill payment services
+# InvoicePaymentServices
+Invoice payment services
 
 User Story:
-As a user, I want to be able to process payments for vendor/supplier bills. To achieve this, I need a web app that allows me to select a bill to pay, specify payment details, save the payment information, and view a list of payment information for paid bills.
+As a user, I want to be able to process payments for vendor/supplier Invoices. To achieve this, I need a web app that allows me to select a Invoice to pay, specify payment details, save the payment information, and view a list of payment information for paid Invoices.
  
 Task Acceptance Criteria:
-1.	The system should provide a list of bills, and I should be able to select one bill to create payments for.
+1.	The system should provide a list of Invoices, and I should be able to select one Invoice to create payments for.
 2.	When creating a payment, I should be able to enter the following information: amount, debit date, and payment method (e.g., Bank transfer, Email transfer, Credit card).
 3.	After entering the payment information, I should be able to submit it.
-4.	Multiple payments can be attributed to a single bill until it is completely settled.
-5.	Once a payment has been created, the system should automatically mark the bill as paid if the full amount has been paid off.
-6.	The system should maintain a list of paid bills, including their payment information.
+4.	Multiple payments can be attributed to a single Invoice until it is completely settled.
+5.	Once a payment has been created, the system should automatically mark the Invoice as paid if the full amount has been paid off.
+6.	The system should maintain a list of paid Invoices, including their payment information.
 7.	The web app should handle any errors or exceptions and provide clear error messages when necessary.
  
 Task Component Requirements:
@@ -21,13 +21,13 @@ Task Component Requirements:
  
 Wireframes:
 •	Home page
- ![image](https://github.com/MingGitForPlooto/BillPaymentServices/assets/147672072/381a73a6-c83b-4a4c-9425-c42a87aad3cb)
+ ![image](https://github.com/MingGitForPlooto/InvoicePaymentServices/assets/147672072/381a73a6-c83b-4a4c-9425-c42a87aad3cb)
 
 •	Create payment
- ![image](https://github.com/MingGitForPlooto/BillPaymentServices/assets/147672072/833c55be-d693-444d-85f1-ed36c47c3e69)
+ ![image](https://github.com/MingGitForPlooto/InvoicePaymentServices/assets/147672072/833c55be-d693-444d-85f1-ed36c47c3e69)
 
 •	Payment history
- ![image](https://github.com/MingGitForPlooto/BillPaymentServices/assets/147672072/f5190648-573e-4747-acd8-f38b13268919)
+ ![image](https://github.com/MingGitForPlooto/InvoicePaymentServices/assets/147672072/f5190648-573e-4747-acd8-f38b13268919)
 
 Evaluation Criteria:
 Your solution will be scored based on the following criteria:
