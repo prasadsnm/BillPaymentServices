@@ -1,5 +1,6 @@
 using InvoicePaymentServices.Core;
 using InvoicePaymentServices.Core.Interfaces.Services;
+using InvoicePaymentServices.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using static System.Net.Mime.MediaTypeNames;
@@ -28,6 +29,10 @@ namespace InvoicePaymentServices.V1.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoicesByAccountId(Guid accountId)
         {
+            if(accountId == Guid.Empty)
+            {
+                return BadRequest("Please input a GUID");
+            }
             var response = await _invoiceService.GetInvoicesByAccountId(accountId).ConfigureAwait(false);
             return response != null ? Ok(response) : NotFound();            
         }

@@ -2,6 +2,7 @@ using AutoFixture;
 using FluentAssertions;
 using InvoicePaymentServices.Core;
 using InvoicePaymentServices.Core.Interfaces.Services;
+using InvoicePaymentServices.Core.Models;
 using InvoicePaymentServices.V1.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

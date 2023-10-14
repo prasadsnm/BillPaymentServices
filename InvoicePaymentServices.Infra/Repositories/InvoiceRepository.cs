@@ -2,6 +2,7 @@
 using AutoMapper.Features;
 using InvoicePaymentServices.Core;
 using InvoicePaymentServices.Core.Interfaces.Repositories;
+using InvoicePaymentServices.Core.Models;
 using InvoicePaymentServices.Infra.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;

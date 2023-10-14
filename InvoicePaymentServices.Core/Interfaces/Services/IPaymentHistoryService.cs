@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace InvoicePaymentServices.Core.Interfaces.Services
 {
-    public interface IInvoiceService
+    public interface IPaymentHistoryService
     {
-        Task<IEnumerable<Invoice>> GetInvoicesByAccountId(Guid AccountId);
-
-        // Does not seem we need this at this point.
-        // Task<Invoice> GetInvoiceById(int id);
+        Task<IEnumerable<Payment>> GetPaymentsByAccountId(Guid accountId);
+        Task<IEnumerable<Payment>> GetPaymentsByInvoiceId(Guid invoiceId);
     }
 }

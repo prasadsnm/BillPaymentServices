@@ -1,5 +1,6 @@
 ﻿using InvoicePaymentServices.Core.Interfaces.Repositories;
 using InvoicePaymentServices.Core.Interfaces.Services;
+using InvoicePaymentServices.Core.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace InvoicePaymentServices.Core.Services
 {
     public class InvoiceService : IInvoiceService
     {
-        public readonly IInvoiceRepository _invoiceRepository;
+        private readonly IInvoiceRepository _invoiceRepository;
         private readonly ILogger<InvoiceService> _logger;
         public InvoiceService(IInvoiceRepository invoiceRepository, ILogger<InvoiceService> logger)
         {
@@ -20,6 +21,11 @@ namespace InvoicePaymentServices.Core.Services
         }
         public async Task<IEnumerable<Invoice>> GetInvoicesByAccountId(Guid accountId)
         {
+            if(accountId == null)
+            {
+                return null;
+            }
+
             try
             {
                 return await _invoiceRepository.GetInvoicesByAccountId(accountId);

@@ -1,6 +1,6 @@
 ﻿using InvoicePaymentServices.Core.Enums;
 
-namespace InvoicePaymentServices.Core
+namespace InvoicePaymentServices.Core.Models
 {
     public class Invoice
     {

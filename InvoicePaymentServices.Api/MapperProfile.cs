@@ -9,7 +9,7 @@ namespace InvoicePaymentServices.Api
     {
         public MapperProfile()
         {
-            CreateMap<Infra.DBEntities.Invoice, Core.Invoice>().IgnoreMember( x=> x.AvailableAction);
+            CreateMap<Infra.DBEntities.Invoice, Core.Models.Invoice>().IgnoreMember( x=> x.AvailableAction);
         }       
     }
 }
