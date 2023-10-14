@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using InvoicePaymentServices.Api.Extensions;
+using System.Linq.Expressions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace InvoicePaymentServices.Api
@@ -7,7 +9,9 @@ namespace InvoicePaymentServices.Api
     {
         public MapperProfile()
         {
-            CreateMap<Infra.DBEntities.Invoice, Core.Invoice>().ReverseMap();
-        }
+            CreateMap<Infra.DBEntities.Invoice, Core.Invoice>().IgnoreMember( x=> x.AvailableAction);
+        }       
     }
 }
+
+

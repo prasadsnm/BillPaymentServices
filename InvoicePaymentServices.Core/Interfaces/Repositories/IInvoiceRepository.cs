@@ -8,7 +8,7 @@ namespace InvoicePaymentServices.Core.Interfaces.Repositories
 {
     public interface IInvoiceRepository
     {       
-            Task<IEnumerable<Invoice>> GetAllInvoices();
+            Task<IEnumerable<Invoice>> GetInvoicesByAccountId(Guid accountId);
      
     }
 }

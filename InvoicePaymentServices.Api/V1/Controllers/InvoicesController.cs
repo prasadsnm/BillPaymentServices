@@ -20,18 +20,16 @@ namespace InvoicePaymentServices.V1.Controllers
             this._logger = logger;
         }
 
-        [HttpGet(Name = "GetInvoice")]
+        [HttpGet(Name = "GetInvoiceByAccountId")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoices()
+        public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoicesByAccountId(Guid accountId)
         {
-            var response = await _invoiceService.GetAllInvoices().ConfigureAwait(false);
-            return response != null ? Ok(response) : NotFound();
-
-            
+            var response = await _invoiceService.GetInvoicesByAccountId(accountId).ConfigureAwait(false);
+            return response != null ? Ok(response) : NotFound();            
         }
     }
 }

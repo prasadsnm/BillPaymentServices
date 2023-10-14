@@ -18,15 +18,15 @@ namespace InvoicePaymentServices.Core.Services
             _invoiceRepository = invoiceRepository ?? throw new ArgumentNullException(nameof(invoiceRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
-        public async Task<IEnumerable<Invoice>> GetAllInvoices()
+        public async Task<IEnumerable<Invoice>> GetInvoicesByAccountId(Guid accountId)
         {
             try
             {
-                return await _invoiceRepository.GetAllInvoices();
+                return await _invoiceRepository.GetInvoicesByAccountId(accountId);
             }
             catch (Exception exception)
             {
-                _logger.LogError($"Error while trying to call GetAll in service class, Error Message = {exception}.");
+                _logger.LogError($"Error while trying to call GetAllInvoices in service class, Error Message = {exception}.");
                 throw;
             }
         }

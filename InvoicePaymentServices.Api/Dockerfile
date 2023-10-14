@@ -7,16 +7,18 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["InvoicePaymentServices.csproj", "."]
-RUN dotnet restore "./InvoicePaymentServices.csproj"
+COPY ["InvoicePaymentServices.Api/InvoicePaymentServices.Api.csproj", "InvoicePaymentServices.Api/"]
+COPY ["InvoicePaymentServices.Core/InvoicePaymentServices.Core.csproj", "InvoicePaymentServices.Core/"]
+COPY ["InvoicePaymentServices.Infra/InvoicePaymentServices.Infra.csproj", "InvoicePaymentServices.Infra/"]
+RUN dotnet restore "InvoicePaymentServices.Api/InvoicePaymentServices.Api.csproj"
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "InvoicePaymentServices.csproj" -c Release -o /app/build
+WORKDIR "/src/InvoicePaymentServices.Api"
+RUN dotnet build "InvoicePaymentServices.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "InvoicePaymentServices.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "InvoicePaymentServices.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "InvoicePaymentServices.dll"]
+ENTRYPOINT ["dotnet", "InvoicePaymentServices.Api.dll"]

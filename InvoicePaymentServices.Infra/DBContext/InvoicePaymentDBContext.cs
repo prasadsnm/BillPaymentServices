@@ -1,4 +1,4 @@
-﻿using InvoicePaymentServices.Core;
+﻿using InvoicePaymentServices.Infra.DBEntities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
