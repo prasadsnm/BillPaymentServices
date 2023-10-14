@@ -17,11 +17,12 @@ namespace InvoicePaymentServices.V1.Controllers
 
         public InvoicesController(IInvoiceService invoiceService, ILogger<InvoicesController> logger)
         {
-            this._invoiceService= invoiceService?? throw new ArgumentNullException(nameof(invoiceService));
-            this._logger = logger;
+            this._invoiceService = invoiceService?? throw new ArgumentNullException(nameof(invoiceService));
+            this._logger         = logger;
         }
 
-        [HttpGet(Name = "GetInvoiceByAccountId")]
+
+        [HttpGet(Name            = "GetInvoiceByAccountId")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -29,12 +30,13 @@ namespace InvoicePaymentServices.V1.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoicesByAccountId(Guid accountId)
         {
-            if(accountId == Guid.Empty)
+            if(accountId         == Guid.Empty)
             {
                 return BadRequest("Please input a GUID");
             }
-            var response = await _invoiceService.GetInvoicesByAccountId(accountId).ConfigureAwait(false);
-            return response != null ? Ok(response) : NotFound();            
+
+            var response         = await _invoiceService.GetInvoicesByAccountId(accountId).ConfigureAwait(false);
+            return response == null ? NotFound() : Ok(response);
         }
     }
 }

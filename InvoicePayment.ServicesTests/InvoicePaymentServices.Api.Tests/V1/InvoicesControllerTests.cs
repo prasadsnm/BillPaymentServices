@@ -14,6 +14,7 @@ namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
     {
         private readonly IFixture _fixture;
         private readonly Mock<IInvoiceService> _serviceMoq;
+        private readonly Guid _guidMoq = Guid.NewGuid();
         private readonly Mock<ILogger<InvoicesController>> _loggerMoq;
         private readonly InvoicesController _target;
 
@@ -26,17 +27,17 @@ namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
         }
 
         [Fact]
-        public async void GetInvoices_ReturnOK_WhenDataIsFound()
+        public async void GetInvoicesByAccountId_ReturnOK_WhenDataIsFound()
         {
             // Arrange
             var invoiceMoq = _fixture.Create<IEnumerable<Invoice>>();
-            _serviceMoq.Setup(x => x.GetInvoicesByAccountId(It.IsAny<Guid>())).ReturnsAsync(invoiceMoq);
+            _serviceMoq.Setup(x => x.GetInvoicesByAccountId(_guidMoq)).ReturnsAsync(invoiceMoq);
 
             // Act
-            var result = await _target.GetInvoicesByAccountId(It.IsAny<Guid>()).ConfigureAwait(false);
+            var result = await _target.GetInvoicesByAccountId(_guidMoq).ConfigureAwait(false);
 
             // Assert
-            _serviceMoq.Verify(x => x.GetInvoicesByAccountId(It.IsAny<Guid>()), Times.Once());
+            _serviceMoq.Verify(x => x.GetInvoicesByAccountId(_guidMoq), Times.Once());
 
             result.Should().NotBeNull();
             result.Should().BeAssignableTo<ActionResult<IEnumerable<Invoice>>>();
@@ -46,20 +47,37 @@ namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
         }
 
         [Fact]
-        public async void GetInvoices_ReturnsNotFound_WhenDataIsNotFound()
+        public async void GetInvoicesByAccountId_ReturnsNotFound_WhenDataIsNotFound()
         {
             // Arrange
             List<Invoice> nullInvoice = null;
-            _serviceMoq.Setup(x => x.GetInvoicesByAccountId(It.IsAny<Guid>())).ReturnsAsync(nullInvoice);
+            _serviceMoq.Setup(x => x.GetInvoicesByAccountId(_guidMoq)).ReturnsAsync(nullInvoice);
 
             // Act
-            var result = await _target.GetInvoicesByAccountId(It.IsAny<Guid>()).ConfigureAwait(false);
+            var result = await _target.GetInvoicesByAccountId(_guidMoq).ConfigureAwait(false);
 
             // Assert
-            _serviceMoq.Verify(x => x.GetInvoicesByAccountId(It.IsAny<Guid>()), Times.Once());
+            _serviceMoq.Verify(x => x.GetInvoicesByAccountId(_guidMoq), Times.Once());
 
             result.Should().NotBeNull();
             result.Result.Should().BeAssignableTo<NotFoundResult>();
+        }
+
+        [Fact]
+        public async void GetInvoicesByAccountId_ReturnsBadRequest_WhenGetEmptyGuid()
+        {
+            // Arrange
+            var invoiceMoq = _fixture.Create<IEnumerable<Invoice>>();
+            _serviceMoq.Setup(x => x.GetInvoicesByAccountId(_guidMoq)).ReturnsAsync(invoiceMoq);
+
+            // Act
+            var result = await _target.GetInvoicesByAccountId(Guid.Empty).ConfigureAwait(false);
+
+            // Assert
+            _serviceMoq.Verify(x => x.GetInvoicesByAccountId(It.IsAny<Guid>()), Times.Never());
+
+            result.Should().NotBeNull();
+            result.Result.Should().BeAssignableTo<BadRequestObjectResult>();
         }
 
         [Fact]
