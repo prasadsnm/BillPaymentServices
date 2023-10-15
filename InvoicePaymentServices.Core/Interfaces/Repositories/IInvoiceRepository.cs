@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace InvoicePaymentServices.Core.Interfaces.Repositories
 {
     public interface IInvoiceRepository
-    {       
-            Task<IEnumerable<Invoice>> GetInvoicesByAccountId(Guid accountId);
-     
+    {
+        Task<IEnumerable<Invoice>> GetInvoicesByAccountId(Guid accountId);
     }
 }

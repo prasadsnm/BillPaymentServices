@@ -8,7 +8,6 @@ namespace InvoicePaymentServices.Core.Models
         public Guid BillToId { get; set; }
         public Guid VendorId { get; set; }
         public decimal Amount { get; set; }
-        public decimal UnpaidAmount {  get; set; }
         public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime DueDate { get; set; }
@@ -18,7 +17,5 @@ namespace InvoicePaymentServices.Core.Models
         // This is to make frontend dev life easier.
         // Some available actions/links can be constructed by backend.
         public string AvailableAction { get; set; }
-        
-
     }
 }

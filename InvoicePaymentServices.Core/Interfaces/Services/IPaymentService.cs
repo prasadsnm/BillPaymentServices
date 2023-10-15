@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace InvoicePaymentServices.Core.Interfaces.Services
 {
-    public interface IPaymentHistoryService
+    public interface IPaymentService
     {
         Task<IEnumerable<Payment>> GetPaymentsByAccountId(Guid accountId);
-        Task<IEnumerable<Payment>> GetPaymentsByInvoiceId(Guid invoiceId);
+        Task<IEnumerable<Payment>> GetPaymentsByInvoiceId(int invoiceId);
+        Task<Payment> GetPaymentByPaymentId(int paymentId);
+        Task<Payment> SchedulePayment(Payment payment);
+
+
     }
 }

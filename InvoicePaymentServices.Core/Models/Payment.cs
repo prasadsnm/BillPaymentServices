@@ -9,11 +9,21 @@ namespace InvoicePaymentServices.Core.Models
     public class Payment
     {
         // Not clear about the requirement and business logic behind,
-        // So here we assume this is this is to set up a future payment.
+        // here we assume this is to set up a future payment.
         // This table is only for this information and past successful payment
         public int Id { get; set; }
-        public Guid InvoiceId { get; set; }
-        public decimal PayAmount {  get; set; }
+        public int InvoiceId { get; set; }
+
+        // This should be easily retrived from front end.
+        // For convenience only to save a db query.
+        // Need re-visit
+        public decimal InvoiceAmount { get; set; }
+
+        // This should be easily retrived from front end.
+        // For convenience only to save a db query.
+        // Need re-visit
+        public Guid BillToId { get; set; }
+        public decimal PayAmount { get; set; }
         public DateTime PayDate { get; set; }
         public string Status { get; set; }
     }

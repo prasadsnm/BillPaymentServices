@@ -18,17 +18,17 @@ namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
     public class PaymentHistoryControllerTests
     {
         private readonly IFixture _fixture;
-        private readonly Mock<IPaymentHistoryService> _serviceMoq;
+        private readonly Mock<IPaymentService> _serviceMoq;
         private readonly Guid _guidMoq = Guid.NewGuid();
-        private readonly Mock<ILogger<PaymentHistoryController>> _loggerMoq;
-        private readonly PaymentHistoryController _target;
+        private readonly Mock<ILogger<PaymentsController>> _loggerMoq;
+        private readonly PaymentsController _target;
 
         public PaymentHistoryControllerTests()
         {
             _fixture = new Fixture();
-            _serviceMoq = _fixture.Freeze<Mock<IPaymentHistoryService>>();
-            _loggerMoq = _fixture.Freeze<Mock<ILogger<PaymentHistoryController>>>();
-            _target = new PaymentHistoryController(_serviceMoq.Object, _loggerMoq.Object);
+            _serviceMoq = _fixture.Freeze<Mock<IPaymentService>>();
+            _loggerMoq = _fixture.Freeze<Mock<ILogger<PaymentsController>>>();
+            _target = new PaymentsController(_serviceMoq.Object, _loggerMoq.Object);
         }
 
         [Fact]
@@ -55,13 +55,13 @@ namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
         {
             // Arrange
             List<Payment> nullPaymentHistory = null;
-            _serviceMoq.Setup(x=>x.GetPaymentsByAccountId(_guidMoq)).ReturnsAsync(nullPaymentHistory);
+            _serviceMoq.Setup(x => x.GetPaymentsByAccountId(_guidMoq)).ReturnsAsync(nullPaymentHistory);
 
             // Act
             var result = await _target.GetPaymentsByAccountId(_guidMoq).ConfigureAwait(false);
 
             // Assert
-            _serviceMoq.Verify(x=> x.GetPaymentsByAccountId(_guidMoq), Times.Once);
+            _serviceMoq.Verify(x => x.GetPaymentsByAccountId(_guidMoq), Times.Once);
             result.Should().NotBeNull();
             result.Result.Should().BeAssignableTo<NotFoundResult>();
         }
@@ -86,8 +86,8 @@ namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
         [Fact]
         public void GetPaymentHistoryByAccountId_ThrowsException_WhenParameterIsNull()
         {
-            IPaymentHistoryService _service = null;
-            Assert.Throws<ArgumentNullException>(()=> new PaymentHistoryController(_service, _loggerMoq.Object));
+            IPaymentService _service = null;
+            Assert.Throws<ArgumentNullException>(() => new PaymentsController(_service, _loggerMoq.Object));
         }
 
         [Fact]
@@ -95,13 +95,14 @@ namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
         {
             // Arrange
             var paymentsHistoryMoq = _fixture.Create<IEnumerable<Payment>>();
-            _serviceMoq.Setup(x => x.GetPaymentsByInvoiceId(_guidMoq)).ReturnsAsync(paymentsHistoryMoq);
+            var id = _fixture.Create<int>();
+            _serviceMoq.Setup(x => x.GetPaymentsByInvoiceId(id)).ReturnsAsync(paymentsHistoryMoq);
 
             // Act
-            var result = await _target.GetPaymentsByInvoiceId(_guidMoq).ConfigureAwait(false);
+            var result = await _target.GetPaymentsByInvoiceId(id).ConfigureAwait(false);
 
             // Assert
-            _serviceMoq.Verify(x => x.GetPaymentsByInvoiceId(_guidMoq), Times.Once());
+            _serviceMoq.Verify(x => x.GetPaymentsByInvoiceId(id), Times.Once());
 
             result.Should().NotBeNull();
             result.Should().BeAssignableTo<ActionResult<IEnumerable<Payment>>>();
@@ -114,32 +115,52 @@ namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
         {
             // Arrange
             List<Payment> nullPaymentHistory = null;
-            _serviceMoq.Setup(x => x.GetPaymentsByInvoiceId(_guidMoq)).ReturnsAsync(nullPaymentHistory);
+            var id = _fixture.Create<int>();
+            _serviceMoq.Setup(x => x.GetPaymentsByInvoiceId(id)).ReturnsAsync(nullPaymentHistory);
 
             // Act
-            var result = await _target.GetPaymentsByInvoiceId(_guidMoq).ConfigureAwait(false);
+            var result = await _target.GetPaymentsByInvoiceId(id).ConfigureAwait(false);
 
             // Assert
-            _serviceMoq.Verify(x => x.GetPaymentsByInvoiceId(_guidMoq), Times.Once);
+            _serviceMoq.Verify(x => x.GetPaymentsByInvoiceId(id), Times.Once);
             result.Should().NotBeNull();
             result.Result.Should().BeAssignableTo<NotFoundResult>();
         }
 
         [Fact]
-        public async Task GetPaymentsHistoryByInvoiceId_ReturnsBadRequest_WhenGetEmptyGuid()
+        public async Task GetPaymentsHistoryByInvoiceId_ReturnsBadRequest_WhenGetZeroId()
         {
             // Arrange
             var paymentsHistoryMoq = _fixture.Create<IEnumerable<Payment>>();
-            _serviceMoq.Setup(x => x.GetPaymentsByInvoiceId(It.IsAny<Guid>())).ReturnsAsync(paymentsHistoryMoq);
+            var id = 0;
+            _serviceMoq.Setup(x => x.GetPaymentsByInvoiceId(id)).ReturnsAsync(paymentsHistoryMoq);
 
             // Act
-            var result = await _target.GetPaymentsByInvoiceId(Guid.Empty).ConfigureAwait(false);
+            var result = await _target.GetPaymentsByInvoiceId(id).ConfigureAwait(false);
 
             // Assert
-            _serviceMoq.Verify(x => x.GetPaymentsByInvoiceId(It.IsAny<Guid>()), Times.Never());
+            _serviceMoq.Verify(x => x.GetPaymentsByInvoiceId(id), Times.Never());
 
             result.Should().NotBeNull();
             result.Result.Should().BeAssignableTo<BadRequestObjectResult>();
-        }    
-    }        
+        }
+
+        [Fact]
+        public async Task GetPaymentsHistoryByInvoiceId_ReturnsBadRequest_WhenGetNegativeId()
+        {
+            // Arrange
+            var paymentsHistoryMoq = _fixture.Create<IEnumerable<Payment>>();
+            var id = -1;
+            _serviceMoq.Setup(x => x.GetPaymentsByInvoiceId(id)).ReturnsAsync(paymentsHistoryMoq);
+
+            // Act
+            var result = await _target.GetPaymentsByInvoiceId(id).ConfigureAwait(false);
+
+            // Assert
+            _serviceMoq.Verify(x => x.GetPaymentsByInvoiceId(id), Times.Never());
+
+            result.Should().NotBeNull();
+            result.Result.Should().BeAssignableTo<BadRequestObjectResult>();
+        }
+    }
 }

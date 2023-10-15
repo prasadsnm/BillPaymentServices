@@ -11,6 +11,7 @@ namespace InvoicePaymentServices.Core.Enums
         Scheduled,
         Paid,
         Canceled,
-        Failed
+        Failed,
+        Voided
     }
 }

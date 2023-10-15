@@ -42,7 +42,10 @@ namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
             result.Should().NotBeNull();
             result.Should().BeAssignableTo<ActionResult<IEnumerable<Invoice>>>();
             result.Result.Should().BeAssignableTo<OkObjectResult>();
-            result.Result.As<OkObjectResult>().Value.Should().NotBeNull()
+            result.Result
+                .As<OkObjectResult>()
+                .Value.Should()
+                .NotBeNull()
                 .And.BeOfType(invoiceMoq.GetType());
         }
 
@@ -84,7 +87,9 @@ namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
         public void CreateController_ThrowsException_WhenParameterIsNull()
         {
             IInvoiceService nullInterface = null;
-            Assert.Throws<ArgumentNullException>(()=> new InvoicesController(nullInterface, _loggerMoq.Object));
+            Assert.Throws<ArgumentNullException>(
+                () => new InvoicesController(nullInterface, _loggerMoq.Object)
+            );
         }
     }
 }

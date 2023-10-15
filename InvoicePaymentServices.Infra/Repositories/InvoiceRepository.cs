@@ -14,10 +14,11 @@ using System.Threading.Tasks;
 
 namespace InvoicePaymentServices.Infra.Repositories
 {
-    public class InvoiceRepository : IInvoiceRepository 
+    public class InvoiceRepository : IInvoiceRepository
     {
         private readonly InvoicePaymentDBContext _dbcontext;
         private readonly IMapper _mapper;
+
         public InvoiceRepository(InvoicePaymentDBContext dbcontext, IMapper mapper)
         {
             _dbcontext = dbcontext ?? throw new ArgumentNullException(nameof(dbcontext));
@@ -26,10 +27,10 @@ namespace InvoicePaymentServices.Infra.Repositories
 
         public async Task<IEnumerable<Invoice>> GetInvoicesByAccountId(Guid accountId)
         {
-            var invoices = await _dbcontext.Invoice.ToListAsync().ConfigureAwait(false);
+            var invoices = await _dbcontext.Invoice.Where(x => x.BillToId == accountId).ToListAsync().ConfigureAwait(false);
             if (invoices != null)
             {
-                var result = _mapper.Map<IEnumerable<Invoice>>(invoices).Where(x=>x.BillToId == accountId);
+                var result = _mapper.Map<IEnumerable<Invoice>>(invoices);
                 foreach (var invoice in result)
                 {
                     invoice.AvailableAction = ConstructAvailableActionField(invoice.Id);
@@ -37,6 +38,7 @@ namespace InvoicePaymentServices.Infra.Repositories
 
                 return result;
             }
+
             return null;
         }
 
@@ -47,8 +49,5 @@ namespace InvoicePaymentServices.Infra.Repositories
         {
             return "https://This.is.what.you.can.do." + id;
         }
-
-
     }
-
 }

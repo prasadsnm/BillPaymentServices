@@ -14,25 +14,25 @@ namespace InvoicePaymentServices.Core.Services
     {
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly ILogger<InvoiceService> _logger;
+
         public InvoiceService(IInvoiceRepository invoiceRepository, ILogger<InvoiceService> logger)
         {
-            _invoiceRepository = invoiceRepository ?? throw new ArgumentNullException(nameof(invoiceRepository));
+            _invoiceRepository =
+                invoiceRepository ?? throw new ArgumentNullException(nameof(invoiceRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
+
         public async Task<IEnumerable<Invoice>> GetInvoicesByAccountId(Guid accountId)
         {
-            if(accountId == null)
-            {
-                return null;
-            }
-
             try
             {
                 return await _invoiceRepository.GetInvoicesByAccountId(accountId);
             }
             catch (Exception exception)
             {
-                _logger.LogError($"Error while trying to call GetAllInvoices in service class, Error Message = {exception}.");
+                _logger.LogError(
+                    $"Error while trying to call GetAllInvoices in service class, Error Message = {exception}."
+                );
                 throw;
             }
         }

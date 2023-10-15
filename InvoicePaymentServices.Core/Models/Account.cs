@@ -15,11 +15,11 @@ namespace InvoicePaymentServices.Core.Models
         public string? Description { get; set; }
 
         [StringLength(150)]
-        public string? Address {  get; set; }
-        
+        public string? Address { get; set; }
+
         // This is to simplify the demo code only.
         // Need to re-visit
-        public bool AcceptBank{  get; set; }
+        public bool AcceptBank { get; set; }
         public bool AcceptEmail { get; set; }
         public bool AcceptCreditCard { get; set; }
         public bool AcceptOther { get; set; }

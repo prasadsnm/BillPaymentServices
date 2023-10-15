@@ -13,7 +13,7 @@ namespace InvoicePaymentServices.Infra.DBEntities
     public class Invoice
     {
         // This is probably not a good idea to use autoincrement integer here.
-        // We only set it up this way to simplify the code. 
+        // We only set it up this way to simplify the code.
         // Need re-visit.
         [Key]
         [Required]
@@ -29,11 +29,9 @@ namespace InvoicePaymentServices.Infra.DBEntities
 
         [Required]
         public decimal Amount { get; set; }
+
         [Required]
-        public decimal UnpaidAmount { get; set; }
-       
-        [Required]
-        public string Status  { get; set; }
+        public string Status { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
@@ -49,6 +47,5 @@ namespace InvoicePaymentServices.Infra.DBEntities
 
         [DataType(DataType.Text)]
         public string? FileLink { get; set; }
-       
     }
 }
