@@ -1,10 +1,11 @@
 Invoice payment services
 
+Visual Studio 2022
 Project target framework: .Net 6.0
 Doceker is for Windows
  
 Assumption:
-1. The system does not handle payment processing and rely on third party to do it. Essencially we are a book keeping system.
+1. The system does not handle payment processing and rely on third party to do it. Essentially we are a book keeping component.
 
 2. Credit card or banking information (not sure about this one) are not stored in system.
 
@@ -42,8 +43,15 @@ PaymentMethod	How the vendor get paid			String(enum)
 The design diagram can be found at the root directory.
 ![design](../Bill_Payment_Service_Design.jpg)
 
+10. Account table is simple designed just to support the demo.
+
+11. Authentication and authorization are not supported in this demo.
+
 
 After thought:
 1. we may want to use string instead of decimal for money. For storage and transmission only. Use decimal for display.
 
 2. all enum should probably go to database and cache instead of in code.
+
+3. The business logic is not supposed to be done in repository level. I did not realize this issue till the last minute. too
+	late to change.

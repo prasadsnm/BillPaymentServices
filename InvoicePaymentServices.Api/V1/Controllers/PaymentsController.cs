@@ -83,6 +83,9 @@ namespace InvoicePaymentServices.Api.V1.Controllers
             return CreatedAtRoute(nameof(GetPaymentByPaymentId), new { paymentId = response.Id }, response);
         }
 
+        // This is not the right place to put this api.
+        // This is supposed to be only called by internal service not public.
+        // Or we can use token to do the authorization.
         [HttpPatch("{paymentId}", Name = "UpdatePaymentAndInvoice")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

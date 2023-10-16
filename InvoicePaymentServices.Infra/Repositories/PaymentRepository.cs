@@ -60,7 +60,8 @@ namespace InvoicePaymentServices.Infra.Repositories
             return null;
         }
 
-
+        // This is wrong place to handle the business logic. It should be in serive level. 
+        // It was too late to change at this point. Need re-visit for sure.
         public async Task<bool> UpdatePaymentAndInvoice(int paymentId, string status)
         {
             // Not sure if a transaction is proper here. Need re-visit.
