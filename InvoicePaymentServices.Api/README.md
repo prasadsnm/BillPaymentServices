@@ -1,55 +1,31 @@
-# InvoicePaymentServices
 Invoice payment services
 
-User Story:
-As a user, I want to be able to process payments for vendor/supplier Invoices. To achieve this, I need a web app that allows me to select a Invoice to pay, specify payment details, save the payment information, and view a list of payment information for paid Invoices.
- 
-Task Acceptance Criteria:
-1.	The system should provide a list of Invoices, and I should be able to select one Invoice to create payments for.
-2.	When creating a payment, I should be able to enter the following information: amount, debit date, and payment method (e.g., Bank transfer, Email transfer, Credit card).
-3.	After entering the payment information, I should be able to submit it.
-4.	Multiple payments can be attributed to a single Invoice until it is completely settled.
-5.	Once a payment has been created, the system should automatically mark the Invoice as paid if the full amount has been paid off.
-6.	The system should maintain a list of paid Invoices, including their payment information.
-7.	The web app should handle any errors or exceptions and provide clear error messages when necessary.
- 
-Task Component Requirements:
-•	The solution can be implemented with framework(s) of your choice.
-•	The solution requires to have a backend, as well as a GUI.
-•	The backend needs to have a way to persist the data. This resource should not just be a static List but an in-memory resource, SQLite or file system is perfectly acceptable as well.
-•	The solution should include appropriate tests.
- 
-Wireframes:
-•	Home page
- ![image](https://github.com/MingGitForPlooto/InvoicePaymentServices/assets/147672072/381a73a6-c83b-4a4c-9425-c42a87aad3cb)
-
-•	Create payment
- ![image](https://github.com/MingGitForPlooto/InvoicePaymentServices/assets/147672072/833c55be-d693-444d-85f1-ed36c47c3e69)
-
-•	Payment history
- ![image](https://github.com/MingGitForPlooto/InvoicePaymentServices/assets/147672072/f5190648-573e-4747-acd8-f38b13268919)
-
-Evaluation Criteria:
-Your solution will be scored based on the following criteria:
-•	User experience: your solution should be easy for users to understand, use and navigate. It doesn’t need to be pretty.
-•	Functionality: your solution should meet all of the requirements outlined above.
-•	Code quality: your code should follow best practices, including industry standards like persistent storage, tests, logging and error handling.
-•	Setup & Deployment: your solution should have instructions for building, running, and deploying the code.
- 
-Things that will make our life easier:
-•	A README file that tells about the solution structure and environment requirements (runtime version, node version etc. as applicable)
-•	Please document any assumptions you make in the README file.
-•	Please don’t include compiled binaries in your GitHub repository.
+Project target framework: .Net 6.0
+Doceker is for Windows
  
 Assumption:
 1. The system does not handle payment processing and rely on third party to do it. Essencially we are a book keeping system.
+
 2. Credit card or banking information (not sure about this one) are not stored in system.
+
 3. Only support one currency.
+
 4. We have 100000 accounts and each account will submit 10 payments.
-5. 
 
+5. Given the transactions volume, traditional relation database should be adequate.
 
-A payment system interacts with a lot of internal services (accounting, analytics, etc.) and external services (payment service providers). When a service fails, we may see inconsistent states among services. Therefore, we need to perform reconciliation and fix any inconsistencies. 
+6. No load testing has been performed in this demo. Only a few unit tests, integration tests, and functional tests are included in this demo.
+
+7. The demo did not provide api for getting one invoice by invoice id. Instead, api is for getting all invoices for a user by account id. 
+	The front end should be able to use them to get information for any single invoice. For simplicity, no paging is provided.
+
+8. Since there are date in the payment submit page, I assume that this is for future payment schedule. In this case, I also assume 
+	only submit of payment does not automatically change the status of invoice because it could be scheduled in future. Only when we 
+	get updated from external component (see desing diagram), we will change the status of both the payment and invoice.
+
+9. After the user submit the payment, our system do the recoring and submit a payment order to another service called Payment Execution System.
+	who is going to connect to external banking service provider and do the money transaction as scheduled. It will update our system
+	with the status of the payment. The payment order will be something like the following.
 
 Payment Order
 Field			Description	                    Type
@@ -63,5 +39,11 @@ PaymentId		Pyment id created from IPS	    GUID
 PaymentMethod	How the vendor get paid			String(enum)
 
 
+The design diagram can be found at the root directory.
+![design](../Bill_Payment_Service_Design.jpg)
+
+
 After thought:
 1. we may want to use string instead of decimal for money. For storage and transmission only. Use decimal for display.
+
+2. all enum should probably go to database and cache instead of in code.

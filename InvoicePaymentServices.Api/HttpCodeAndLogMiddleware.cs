@@ -128,7 +128,6 @@ namespace InvoicePaymentServices.Api.Middlewares
                     Message = string.IsNullOrWhiteSpace(exception.Message) ? alternateMessage : exception.Message,
                     StatusCode = (int)httpStatusCode,
                     TimeStamp = DateTime.Now
-                    //StackTrace = string.IsNullOrWhiteSpace(alternateMessage) ? exception.StackTrace : alternateMessage
                 }); ;
 
             httpContext.Response.Clear();
