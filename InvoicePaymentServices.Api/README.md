@@ -41,4 +41,27 @@ Things that will make our life easier:
 •	Please document any assumptions you make in the README file.
 •	Please don’t include compiled binaries in your GitHub repository.
  
+Assumption:
+1. The system does not handle payment processing and rely on third party to do it. Essencially we are a book keeping system.
+2. Credit card or banking information (not sure about this one) are not stored in system.
+3. Only support one currency.
+4. We have 100000 accounts and each account will submit 10 payments.
+5. 
 
+
+A payment system interacts with a lot of internal services (accounting, analytics, etc.) and external services (payment service providers). When a service fails, we may see inconsistent states among services. Therefore, we need to perform reconciliation and fix any inconsistencies. 
+
+Payment Order
+Field			Description	                    Type
+--------------------------------------------------------
+VendorId		Which vender should get paid	GUID
+BillToId		which account should pay        GUID
+Amount			The pay amount	                Decimal
+PayDate			When to send the payment	    DateTime
+Currency		The currency for the order	    String(enum)
+PaymentId		Pyment id created from IPS	    GUID
+PaymentMethod	How the vendor get paid			String(enum)
+
+
+After thought:
+1. we may want to use string instead of decimal for money. For storage and transmission only. Use decimal for display.

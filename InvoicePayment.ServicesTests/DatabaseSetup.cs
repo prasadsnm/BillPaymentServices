@@ -25,7 +25,8 @@ namespace InvoicePaymentServices.Tests
                 .RuleFor(o => o.BillToId, f => f.Random.Guid())
                 .RuleFor(o => o.PayAmount, f => f.Random.Decimal(1, 50))
                 .RuleFor(o => o.Status, f => f.PickRandom<PaymentStatus>().ToString())
-                .RuleFor(o => o.PayDate, f => f.Date.Future(1, DateTime.Now));
+                .RuleFor(o => o.PayDate, f => f.Date.Future(1, DateTime.Now))
+                .RuleFor(o => o.PaymentMethod, f => $"Payment Method {payment}");
 
             var payments = fakePayments.Generate(10);
 
@@ -35,7 +36,7 @@ namespace InvoicePaymentServices.Tests
             // For invoice db
             context.Invoice.RemoveRange(context.Invoice);
 
-            var invoiceId = 1;            
+            var invoiceId = 1;
 
             var fakeInvoices = new Faker<Invoice>()
                 .RuleFor(o => o.Id, f => invoiceId++)
@@ -67,8 +68,6 @@ namespace InvoicePaymentServices.Tests
             }
 
             context.AddRange(invoices);
-
-
             context.SaveChanges();
         }
     }

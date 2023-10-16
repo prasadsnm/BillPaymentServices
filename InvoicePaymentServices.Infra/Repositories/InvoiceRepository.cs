@@ -29,7 +29,11 @@ namespace InvoicePaymentServices.Infra.Repositories
         {
             // Seemed to be a sqlite bug to deal with GUID. This is a workaround since no time for it now. 
             // This is a tech debt and need re-visit.
-            var invoices = await _dbcontext.Invoice.Where(x => x.BillToId.ToString().Equals(accountId.ToString())).ToListAsync().ConfigureAwait(false);
+
+            var invoices = await _dbcontext.Invoice
+                .Where(x => EF.Functions.Like(x.BillToId.ToString(), accountId.ToString()))
+                .ToListAsync().ConfigureAwait(false);
+
             if (invoices != null)
             {
                 var result = _mapper.Map<IEnumerable<Invoice>>(invoices);

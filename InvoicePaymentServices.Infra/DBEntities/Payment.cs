@@ -34,6 +34,9 @@ namespace InvoicePaymentServices.Infra.DBEntities
         public DateTime PayDate { get; set; }
 
         [Required]
+        public string PaymentMethod { get; set; }
+
+        [Required]
         public string Status { get; set; }
     }
 }

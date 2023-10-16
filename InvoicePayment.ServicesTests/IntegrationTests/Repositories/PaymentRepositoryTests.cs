@@ -10,7 +10,7 @@ using InvoicePaymentServices.Core.Models;
 using InvoicePaymentServices.Tests.Api.IntegrationTests;
 
 namespace InvoicePaymentServices.Tests.Api.IntegrationTests.Repositories
-{    
+{
     public class PaymentRepositoryTests : IClassFixture<DatabaseFixture>
     {
         private readonly IMapper _mapper;
@@ -43,7 +43,7 @@ namespace InvoicePaymentServices.Tests.Api.IntegrationTests.Repositories
         }
 
         [Fact]
-        public async void CreateProduct_SavesCorrectData()
+        public async void CreatePayment_SavesCorrectData()
         {
             var paymentId = 0;
 
@@ -54,16 +54,17 @@ namespace InvoicePaymentServices.Tests.Api.IntegrationTests.Repositories
                 BillToId = new Guid(),
                 PayAmount = 10m,
                 PayDate = DateTime.Parse("2023-10-20T19:33:56.466Z"),
+                PaymentMethod = "Email",
                 Status = "Scheduled"
             };
- 
+
             using (var context = Fixture.CreateContext())
             {
                 var repository = new PaymentRepository(context, _mapper);
 
                 var payment = await repository.SchedulePayment(request);
-                paymentId = payment.Id;   
-                
+                paymentId = payment.Id;
+
                 var newPayment = repository.GetPaymentByPaymentId(paymentId);
 
                 Assert.NotNull(payment);
@@ -71,7 +72,7 @@ namespace InvoicePaymentServices.Tests.Api.IntegrationTests.Repositories
                 Assert.Equal(request.PayAmount, newPayment.Result.PayAmount);
                 Assert.Equal(request.Status, newPayment.Result.Status);
             }
-      
-        }      
+
+        }
     }
 }

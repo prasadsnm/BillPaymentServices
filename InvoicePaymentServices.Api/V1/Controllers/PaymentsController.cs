@@ -1,8 +1,6 @@
 ﻿using InvoicePaymentServices.Core.Interfaces.Services;
 using InvoicePaymentServices.Core.Models;
-using InvoicePaymentServices.Core.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace InvoicePaymentServices.Api.V1.Controllers
@@ -76,13 +74,35 @@ namespace InvoicePaymentServices.Api.V1.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Payment>> SchedulePayment(Payment payment)
         {
-            if (!ModelState.IsValid )
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
             var response = await _paymentService.SchedulePayment(payment).ConfigureAwait(false);
             return CreatedAtRoute(nameof(GetPaymentByPaymentId), new { paymentId = response.Id }, response);
-        }       
+        }
+
+        [HttpPatch("{paymentId}", Name = "UpdatePaymentAndInvoice")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<bool>> UpdatePaymentAndInvoice(int paymentId, string status)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (paymentId <= 0 || string.IsNullOrWhiteSpace(status))
+            {
+                return BadRequest("Please check the input.");
+            }
+
+            var response = await _paymentService.UpdatePaymentAndInvoice(paymentId, status).ConfigureAwait(false);
+            return response != null ? Ok(response) : NotFound();
+        }
     }
 }

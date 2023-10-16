@@ -14,6 +14,7 @@ namespace InvoicePaymentServices.Core.Interfaces.Repositories
         Task<Payment> GetPaymentByPaymentId(int paymentId);
 
         Task<Payment> SchedulePayment(Payment payment);
+        Task<bool> UpdatePaymentAndInvoice(int paymentId, string status);
 
 
     }

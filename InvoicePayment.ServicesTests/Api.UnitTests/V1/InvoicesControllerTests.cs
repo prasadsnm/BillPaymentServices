@@ -49,6 +49,9 @@ namespace InvoicePaymentServices.Tests.Api.Tests.V1
                 .And.BeOfType(invoiceMoq.GetType());
         }
 
+
+        // This is to test that theret is nothing returned. Not for case that there is no
+        // invoices associated with the given account id.
         [Fact]
         public async void GetInvoicesByAccountId_ReturnsNotFound_WhenDataIsNotFound()
         {

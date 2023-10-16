@@ -85,6 +85,24 @@ namespace InvoicePaymentServices.Core.Services
             }
         }
 
+        public async Task<bool> UpdatePaymentAndInvoice(int paymentId, string status)
+        {
+            try
+            {
+                if (paymentId <= 0)
+                {
+                    throw new ArgumentNullException(nameof(paymentId));
+                }
+
+                return await _paymentRepository.UpdatePaymentAndInvoice(paymentId, status);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError($"Error while trying to call UpdatePaymentAndInvoice in service class, Error Message = {exception}.");
+                throw;
+            }
+        }
+
 
     }
 }

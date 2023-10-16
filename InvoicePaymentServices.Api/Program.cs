@@ -1,3 +1,4 @@
+using InvoicePaymentServices.Api.Middlewares;
 using InvoicePaymentServices.Core.Interfaces.Repositories;
 using InvoicePaymentServices.Core.Interfaces.Services;
 using InvoicePaymentServices.Core.Services;
@@ -48,6 +49,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseHttpCodeAndLogMiddleware();
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();

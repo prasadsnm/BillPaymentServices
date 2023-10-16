@@ -25,6 +25,8 @@ namespace InvoicePaymentServices.Core.Models
         public Guid BillToId { get; set; }
         public decimal PayAmount { get; set; }
         public DateTime PayDate { get; set; }
+
+        public string PaymentMethod { get; set; }
         public string Status { get; set; }
     }
 }

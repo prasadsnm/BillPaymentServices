@@ -13,7 +13,6 @@ namespace InvoicePaymentServices.Core.Interfaces.Services
         Task<IEnumerable<Payment>> GetPaymentsByInvoiceId(int invoiceId);
         Task<Payment> GetPaymentByPaymentId(int paymentId);
         Task<Payment> SchedulePayment(Payment payment);
-
-
+        Task<bool> UpdatePaymentAndInvoice(int paymentId, string status);
     }
 }

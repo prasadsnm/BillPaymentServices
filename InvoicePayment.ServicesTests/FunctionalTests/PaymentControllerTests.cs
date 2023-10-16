@@ -28,7 +28,7 @@ namespace InvoicePaymentServices.Tests.FunctionalTests
             var result = JsonConvert.DeserializeObject<IEnumerable<Invoice>>(stringResponse);
             Assert.NotNull(result);
             Assert.Single<Invoice>(result);
-            
+
             var statusCode = response.StatusCode.ToString();
             Assert.Equal("OK", statusCode);
 
