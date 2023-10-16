@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoicePaymentServices.Api", "InvoicePaymentServices.Api\InvoicePaymentServices.Api.csproj", "{3A772C46-F307-4FE5-AC81-AB5140E9E248}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoicePaymentServices.Core", "InvoicePaymentServices.Core\InvoicePaymentServices.Core.csproj", "{296E2C3E-11E2-49A7-9F66-BE69A12D2830}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoicePaymentServices.Infra", "InvoicePaymentServices.Infra\InvoicePaymentServices.Infra.csproj", "{61A26A33-61F3-44DB-8B37-6E8789BFD481}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoicePaymentServices.Tests", "InvoicePayment.ServicesTests\InvoicePaymentServices.Tests.csproj", "{E8C85AF3-F973-4587-B2BD-E969DC1A51B7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{296E2C3E-11E2-49A7-9F66-BE69A12D2830} = {296E2C3E-11E2-49A7-9F66-BE69A12D2830}
+		{3A772C46-F307-4FE5-AC81-AB5140E9E248} = {3A772C46-F307-4FE5-AC81-AB5140E9E248}
+		{61A26A33-61F3-44DB-8B37-6E8789BFD481} = {61A26A33-61F3-44DB-8B37-6E8789BFD481}
+	EndProjectSection
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4C510D34-2DE2-4C12-B8F1-0BFA608305FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A772C46-F307-4FE5-AC81-AB5140E9E248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A772C46-F307-4FE5-AC81-AB5140E9E248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A772C46-F307-4FE5-AC81-AB5140E9E248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A772C46-F307-4FE5-AC81-AB5140E9E248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{296E2C3E-11E2-49A7-9F66-BE69A12D2830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{296E2C3E-11E2-49A7-9F66-BE69A12D2830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{296E2C3E-11E2-49A7-9F66-BE69A12D2830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{296E2C3E-11E2-49A7-9F66-BE69A12D2830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61A26A33-61F3-44DB-8B37-6E8789BFD481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61A26A33-61F3-44DB-8B37-6E8789BFD481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61A26A33-61F3-44DB-8B37-6E8789BFD481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61A26A33-61F3-44DB-8B37-6E8789BFD481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8C85AF3-F973-4587-B2BD-E969DC1A51B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8C85AF3-F973-4587-B2BD-E969DC1A51B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8C85AF3-F973-4587-B2BD-E969DC1A51B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8C85AF3-F973-4587-B2BD-E969DC1A51B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C510D34-2DE2-4C12-B8F1-0BFA608305FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C510D34-2DE2-4C12-B8F1-0BFA608305FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C510D34-2DE2-4C12-B8F1-0BFA608305FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C510D34-2DE2-4C12-B8F1-0BFA608305FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5B12E4E-D6FB-47CA-9D35-0D761E0AAEC3}
+	EndGlobalSection
+EndGlobal

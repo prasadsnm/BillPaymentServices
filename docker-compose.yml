@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  invoicepaymentservices.api:
+    image: ${DOCKER_REGISTRY-}invoicepaymentservicesapi
+    build:
+      context: .
+      dockerfile: InvoicePaymentServices.Api/Dockerfile
