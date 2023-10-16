@@ -24,7 +24,7 @@ namespace InvoicePaymentServices.Infra.Repositories
 
         public async Task<IEnumerable<Payment>> GetPaymentsByAccountId(Guid accountId)
         {
-            var payments = await _dbcontext.Payment.Where(x => x.BillToId == accountId).ToListAsync().ConfigureAwait(false);
+            var payments = await _dbcontext.Payment.Where(x => x.BillToId.ToString().Equals(accountId.ToString())).ToListAsync().ConfigureAwait(false);
             if (payments != null)
             {
                 return _mapper.Map<IEnumerable<Payment>>(payments);
@@ -68,9 +68,11 @@ namespace InvoicePaymentServices.Infra.Repositories
             }
 
             var dbPayment = _mapper.Map<DBEntities.Payment>(payment);
+            dbPayment.Status = "Scheduled";
             await _dbcontext.AddAsync(dbPayment);
             await _dbcontext.SaveChangesAsync();
             payment.Id = dbPayment.Id;
+            payment.Status = dbPayment.Status;
             return payment;
         }
 

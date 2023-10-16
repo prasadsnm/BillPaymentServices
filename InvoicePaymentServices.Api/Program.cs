@@ -16,6 +16,8 @@ builder.Services.AddDbContext<InvoicePaymentDBContext>(
 
 builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -55,3 +57,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+// For functional testing purpose.
+public partial class Program { }

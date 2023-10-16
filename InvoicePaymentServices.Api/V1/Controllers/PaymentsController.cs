@@ -22,7 +22,7 @@ namespace InvoicePaymentServices.Api.V1.Controllers
             _logger = logger;
         }
 
-        [HttpGet("{accountId}", Name = "GetPaymentsByAccountId")]
+        [HttpGet("account/{accountId}", Name = "GetPaymentsByAccountId")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -39,7 +39,7 @@ namespace InvoicePaymentServices.Api.V1.Controllers
             return response == null ? NotFound() : Ok(response);
         }
 
-        [HttpGet("{invoiceId}", Name = "GetPaymentsByInvoiceId")]
+        [HttpGet("invoice/{invoiceId}", Name = "GetPaymentsByInvoiceId")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -82,7 +82,7 @@ namespace InvoicePaymentServices.Api.V1.Controllers
             }
 
             var response = await _paymentService.SchedulePayment(payment).ConfigureAwait(false);
-            return CreatedAtRoute(nameof(GetPaymentByPaymentId), new { id = response.Id }, response);
+            return CreatedAtRoute(nameof(GetPaymentByPaymentId), new { paymentId = response.Id }, response);
         }       
     }
 }

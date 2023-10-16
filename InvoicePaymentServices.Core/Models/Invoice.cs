@@ -14,7 +14,7 @@ namespace InvoicePaymentServices.Core.Models
         public string Description { get; set; }
         public string FileLink { get; set; }
 
-        // This is to make frontend dev life easier.
+        // This is to make front end dev life easier.
         // Some available actions/links can be constructed by backend.
         public string AvailableAction { get; set; }
     }

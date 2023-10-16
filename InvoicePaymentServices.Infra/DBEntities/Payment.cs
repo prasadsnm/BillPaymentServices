@@ -30,6 +30,7 @@ namespace InvoicePaymentServices.Infra.DBEntities
         public decimal PayAmount { get; set; }
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime PayDate { get; set; }
 
         [Required]

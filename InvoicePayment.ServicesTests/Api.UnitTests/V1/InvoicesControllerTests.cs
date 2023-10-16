@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 
-namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
+namespace InvoicePaymentServices.Tests.Api.Tests.V1
 {
     public class InvoicesControllerTests
     {

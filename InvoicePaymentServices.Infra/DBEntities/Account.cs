@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,15 +11,24 @@ namespace InvoicePaymentServices.Infra.DBEntities
     [Table("Account")]
     public class Account
     {
+        [Key]
         public Guid Id { get; set; }
+
+        [DataType(DataType.Text)]
         public string Description { get; set; }
+
+        [DataType(DataType.Text)]
         public string Address { get; set; }
 
         // This is to simplify the demo code only.
         // Need to re-visit
-        public bool AcceptBank { get; set; }
-        public bool AcceptEmail { get; set; }
-        public bool AcceptCreditCard { get; set; }
-        public bool AcceptOther { get; set; }
+        [DataType(DataType.Text)]
+        public string Bank { get; set; }
+
+        [DataType(DataType.Text)]
+        public string Email { get; set; }
+
+        [DataType(DataType.Text)]
+        public string CreditCard { get; set; }
     }
 }

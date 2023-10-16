@@ -27,7 +27,9 @@ namespace InvoicePaymentServices.Infra.Repositories
 
         public async Task<IEnumerable<Invoice>> GetInvoicesByAccountId(Guid accountId)
         {
-            var invoices = await _dbcontext.Invoice.Where(x => x.BillToId == accountId).ToListAsync().ConfigureAwait(false);
+            // Seemed to be a sqlite bug to deal with GUID. This is a workaround since no time for it now. 
+            // This is a tech debt and need re-visit.
+            var invoices = await _dbcontext.Invoice.Where(x => x.BillToId.ToString().Equals(accountId.ToString())).ToListAsync().ConfigureAwait(false);
             if (invoices != null)
             {
                 var result = _mapper.Map<IEnumerable<Invoice>>(invoices);

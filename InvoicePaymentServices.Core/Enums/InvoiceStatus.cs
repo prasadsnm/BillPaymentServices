@@ -12,6 +12,7 @@ namespace InvoicePaymentServices.Core.Enums
         PartiallyPaid,
         Active,
         Archived,
-        Canceled
+        Canceled,
+        Overdued
     }
 }

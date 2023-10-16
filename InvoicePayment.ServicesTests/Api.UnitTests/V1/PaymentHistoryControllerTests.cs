@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InvoicePaymentServices.Tests.InvoicePaymentServices.Api.Tests.V1
+namespace InvoicePaymentServices.Tests.Api.Tests.V1
 {
     public class PaymentHistoryControllerTests
     {

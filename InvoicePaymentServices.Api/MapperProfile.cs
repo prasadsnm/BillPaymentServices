@@ -13,7 +13,8 @@ namespace InvoicePaymentServices.Api
                 .IgnoreMember(x => x.AvailableAction);
 
             CreateMap<Infra.DBEntities.Payment, Core.Models.Payment>()
-                .IgnoreMember(x => x.InvoiceAmount);
+                .IgnoreMember(x => x.InvoiceAmount)
+                .ReverseMap();
         }
     }
 }
