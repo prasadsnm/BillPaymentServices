@@ -2,7 +2,7 @@ name: Build and deploy .NET application to container app invoicepaymentservicesa
 on:
   push:
     branches:
-    - CicdTest
+    - main
 env:
   CONTAINER_APP_CONTAINER_NAME: invoicepaymentservicesapi
   CONTAINER_APP_NAME: invoicepaymentservicesapi-app-20
