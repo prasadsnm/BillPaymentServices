@@ -15,4 +15,10 @@
     <ProjectReference Include="..\InvoicePaymentServices.Core\InvoicePaymentServices.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="SqLite\InvoicePayment.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
