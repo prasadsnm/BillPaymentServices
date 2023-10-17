@@ -6,14 +6,16 @@ using InvoicePaymentServices.Infra.DBContext;
 using InvoicePaymentServices.Infra.Repositories;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.PlatformAbstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // database connection
+var _appEnv = PlatformServices.Default.Application;
 var connectionString = builder.Configuration.GetConnectionString("InvoicePayment");
 builder.Services.AddDbContext<InvoicePaymentDBContext>(
-    options => options.UseSqlite(connectionString)
-);
+    options => { options.UseSqlite($"Data Source={_appEnv.ApplicationBasePath}\\SqLite\\InvoicePayment.sqlite"); });
+
 
 builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();

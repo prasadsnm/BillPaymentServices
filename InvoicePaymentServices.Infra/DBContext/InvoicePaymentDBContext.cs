@@ -15,7 +15,8 @@ namespace InvoicePaymentServices.Infra.DBContext
         public InvoicePaymentDBContext(DbContextOptions<InvoicePaymentDBContext> option)
             : base(option) 
         {
-            Database.EnsureCreated();
+            // This fix does not work for sqlite path issue. It only created an empty db.
+            // Database.EnsureCreated();
         }
 
         public virtual DbSet<Invoice> Invoice { get; set; }
