@@ -13,7 +13,10 @@ namespace InvoicePaymentServices.Infra.DBContext
         public InvoicePaymentDBContext() { }
 
         public InvoicePaymentDBContext(DbContextOptions<InvoicePaymentDBContext> option)
-            : base(option) { }
+            : base(option) 
+        {
+            Database.EnsureCreated();
+        }
 
         public virtual DbSet<Invoice> Invoice { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
