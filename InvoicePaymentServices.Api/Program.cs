@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 var _appEnv = PlatformServices.Default.Application;
 var connectionString = builder.Configuration.GetConnectionString("InvoicePayment");
 builder.Services.AddDbContext<InvoicePaymentDBContext>(
-    options => { options.UseSqlite($"Data Source={_appEnv.ApplicationBasePath}\\SqLite\\InvoicePayment.sqlite"); });
+    options => { options.UseSqlite($"Data Source={_appEnv.ApplicationBasePath}/SqLite/InvoicePayment.sqlite"); });
 
 
 builder.Services.AddScoped<IInvoiceService, InvoiceService>();
