@@ -49,8 +49,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    
     app.UseDeveloperExceptionPage();
 }
 else
@@ -58,6 +57,9 @@ else
     app.UseHttpCodeAndLogMiddleware();
     app.UseHsts();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
