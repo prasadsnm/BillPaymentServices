@@ -30,9 +30,20 @@ jobs:
         push: true
         tags: ${{ env.CONTAINER_REGISTRY_LOGIN_SERVER }}/${{ env.PROJECT_NAME_FOR_DOCKER }}:${{ github.sha }}
         file: ${{ env.DOCKER_FILE_PATH }}
-  deploy:
+  
+  test:
     runs-on: ubuntu-latest
     needs: build
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Test
+      run: dotnet test InvoicePayment.ServicesTests\InvoicePaymentServices.Tests.csproj    
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
     steps:
     - name: Azure Login
       uses: azure/login@v1
