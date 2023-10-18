@@ -1,8 +1,11 @@
-Invoice payment services
+Invoice payment services   
 
-Visual Studio 2022
-Project target framework: .Net 6.0
-Doceker is for Windows
+The Swagger is here.       
+https://invoicepaymentservicesapi-app-20.wonderfulsea-3ee130f2.centralus.azurecontainerapps.io/swagger/index.html
+
+Visual Studio 2022   
+Project target framework: .Net 6.0   
+Doceker is for Windows   
  
 Assumption:
 1. The system does not handle payment processing and rely on third party to do it. Essentially we are a book keeping component.
@@ -28,16 +31,16 @@ Assumption:
 	who is going to connect to external banking service provider and do the money transaction as scheduled. It will update our system
 	with the status of the payment. The payment order will be something like the following.
 
-Payment Order
-Field			Description	                    Type
---------------------------------------------------------
-VendorId		Which vender should get paid	GUID
-BillToId		which account should pay        GUID
-Amount			The pay amount	                Decimal
-PayDate			When to send the payment	    DateTime
-Currency		The currency for the order	    String(enum)
-PaymentId		Pyment id created from IPS	    GUID
-PaymentMethod	How the vendor get paid			String(enum)
+Payment Order   
+
+| Field			|Description	                    |Type |
+--------------|-----------------------------|-------------------------
+|VendorId		|Which vender should get paid	|GUID |   
+|BillToId		|which account should pay       |GUID|   
+|Amount			|The pay amount	                |Decimal|
+|PayDate		|When to send the payment	|DateTime|  
+|PaymentId		|Pyment id created from IPS	|GUID|  
+|PaymentMethod	|How the vendor get paid	|String(enum)|   
 
 
 The design diagram can be found at the root directory.
