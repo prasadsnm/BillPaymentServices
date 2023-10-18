@@ -31,15 +31,16 @@ Assumption:
 	who is going to connect to external banking service provider and do the money transaction as scheduled. It will update our system
 	with the status of the payment. The payment order will be something like the following.
 
-Payment Order
-| Field			|Description	                    |Type
---------------------------------------------------------------------
-|VendorId		|Which vender should get paid	|GUID
-|BillToId		|which account should pay       |GUID
-|Amount			|The pay amount	                |Decimal
-|PayDate		|When to send the payment	|DateTime
-|PaymentId		|Pyment id created from IPS	|GUID
-|PaymentMethod		|How the vendor get paid	|String(enum)
+Payment Order   
+
+| Field			|Description	                    |Type |
+--------------|-----------------------------|-------------------------
+|VendorId		|Which vender should get paid	|GUID |   
+|BillToId		|which account should pay       |GUID|   
+|Amount			|The pay amount	                |Decimal|
+|PayDate		|When to send the payment	|DateTime|  
+|PaymentId		|Pyment id created from IPS	|GUID|  
+|PaymentMethod	|How the vendor get paid	|String(enum)|   
 
 
 The design diagram can be found at the root directory.
