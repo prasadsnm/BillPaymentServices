@@ -1,8 +1,11 @@
-Invoice payment services
+Invoice payment services   
 
-Visual Studio 2022
-Project target framework: .Net 6.0
-Doceker is for Windows
+The Swagger is here.       
+https://invoicepaymentservicesapi-app-20.wonderfulsea-3ee130f2.centralus.azurecontainerapps.io/swagger/index.html
+
+Visual Studio 2022   
+Project target framework: .Net 6.0   
+Doceker is for Windows   
  
 Assumption:
 1. The system does not handle payment processing and rely on third party to do it. Essentially we are a book keeping component.
